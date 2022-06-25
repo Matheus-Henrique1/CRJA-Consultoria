@@ -3,6 +3,8 @@ package com.crjaconsultoria.crjaconsultoriateste.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import com.crjaconsultoria.crjaconsultoriateste.enums.DepartamentoEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +20,6 @@ public class PessoaDTO implements Serializable{
 	
 	private Integer id;
 	private String nome;
-	private Integer idDepartamento;
-	private List<TarefaDTO> tarefas;
+	private DepartamentoEnum departamento;
 
 }

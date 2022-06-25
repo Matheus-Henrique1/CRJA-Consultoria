@@ -3,6 +3,8 @@ package com.crjaconsultoria.crjaconsultoriateste.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.crjaconsultoria.crjaconsultoriateste.enums.DepartamentoEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,9 +22,9 @@ public class TarefaDTO implements Serializable{
 	private String titulo;
 	private String descricao;
 	private LocalDate prazo;
-	private Integer idDepartamento;
+	private DepartamentoEnum departamento;
 	private Integer duracao;
 	private Integer idPessoa;
-	private boolean finalizado;
+	private Boolean finalizado;
 
 }

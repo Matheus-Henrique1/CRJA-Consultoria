@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.crjaconsultoria.crjaconsultoriateste.dto.TarefaDTO;
+import com.crjaconsultoria.crjaconsultoriateste.enums.DepartamentoEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,11 +33,8 @@ public class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Integer idDepartamento;
+	private DepartamentoEnum departamento;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "tarefa_id")
-	private List<Tarefa> tarefas; 
 	
 
 }

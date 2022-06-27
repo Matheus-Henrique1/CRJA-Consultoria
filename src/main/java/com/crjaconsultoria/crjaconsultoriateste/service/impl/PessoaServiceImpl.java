@@ -1,7 +1,9 @@
 package com.crjaconsultoria.crjaconsultoriateste.service.impl;
 
 import com.crjaconsultoria.crjaconsultoriateste.dto.PessoaDTO;
+import com.crjaconsultoria.crjaconsultoriateste.dto.ResponseMediaDTO;
 import com.crjaconsultoria.crjaconsultoriateste.entity.Pessoa;
+import com.crjaconsultoria.crjaconsultoriateste.entity.Tarefa;
 import com.crjaconsultoria.crjaconsultoriateste.enums.DepartamentoEnum;
 import com.crjaconsultoria.crjaconsultoriateste.repository.PessoaRepository;
 import com.crjaconsultoria.crjaconsultoriateste.repository.TarefaRepository;
@@ -98,8 +100,24 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
-    public Integer buscarTotalDePessoasPorDepartamento(Integer idDepartamento) {
-        Integer totalPessoasDepartamento = pessoaRepository.buscarTotalPessoasPorDepartamento(idDepartamento);
-        return totalPessoasDepartamento;
+    public List<PessoaDTO> buscarPessoaPorNomeEPeriodo() {
+        List<Pessoa> listaPessoas = pessoaRepository.findAll();
+        List<PessoaDTO> retorno = new ArrayList<>();
+        listaPessoas.stream().forEach((itemPessoa) -> {
+            PessoaDTO pessoa = new PessoaDTO(itemPessoa);
+            pessoa.setDepartamento(DepartamentoEnum.toEnum(itemPessoa.getIdDepartamento()).getDescricao());
+            List<Tarefa> ListaTarefasPessoa = tarefaRepository.buscarMediaHorasGastasPorTarefas(itemPessoa.getId());
+            ResponseMediaDTO media = new ResponseMediaDTO();
+            List<ResponseMediaDTO> listaMedia = new ArrayList<>();
+            ListaTarefasPessoa.stream().forEach((tp) -> {
+                media.setMediaHorasGastas(tp.getDuracao());
+                media.setPeriodo(tp.getPrazo().getYear());
+                listaMedia.add(media);
+            });
+            pessoa.setMedia(listaMedia);
+            retorno.add(pessoa);
+        });
+        return retorno;
     }
+
 }

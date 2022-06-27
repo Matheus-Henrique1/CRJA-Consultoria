@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.crjaconsultoria.crjaconsultoriateste.entity.Tarefa;
 import com.crjaconsultoria.crjaconsultoriateste.enums.DepartamentoEnum;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -32,8 +33,18 @@ public class TarefaDTO implements Serializable{
 	private LocalDate prazo;
 	private Integer idDepartamento;
 	private String departamento;
-	private Integer duracao;
+	private Double duracao;
 	private Integer idPessoa;
 	private boolean finalizado;
+
+	public TarefaDTO(Tarefa tarefa) {
+		this.id = tarefa.getId();
+		this.titulo = tarefa.getTitulo();
+		this.descricao = tarefa.getDescricao();
+		this.prazo = tarefa.getPrazo();
+		this.idDepartamento = tarefa.getIdDepartamento();
+		this.duracao = tarefa.getDuracao();
+		this.finalizado = tarefa.isFinalizado();
+	}
 
 }

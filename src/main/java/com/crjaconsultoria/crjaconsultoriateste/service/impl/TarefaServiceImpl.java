@@ -11,6 +11,8 @@ import com.crjaconsultoria.crjaconsultoriateste.shared.Mensagens;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -53,12 +55,12 @@ public class TarefaServiceImpl implements TarefaService {
     @Override
     public String finalizar(Integer id) {
         Tarefa tarefa = find(id);
-        if (tarefa.isFinalizado()) {
+        if (!tarefa.isFinalizado()) {
             tarefa.setFinalizado(true);
             tarefaRepository.save(tarefa);
-            return Mensagens.REGISTRO_ATUALIZADO;
-        } else {
             return Mensagens.REGISTRO_FINALIZADO;
+        } else {
+            return Mensagens.REGISTRO_JA_FINALIZADO;
         }
     }
 
@@ -69,5 +71,21 @@ public class TarefaServiceImpl implements TarefaService {
         tarefa.setPessoa(pessoa);
         tarefaRepository.save(tarefa);
         return Mensagens.REGISTRO_ATUALIZADO;
+    }
+
+    @Override
+    public List<TarefaDTO> listarTarefasAntigas(){
+        List<Tarefa> tarefas = tarefaRepository.listarTarefasAntigas();
+        List<TarefaDTO> dto = new ArrayList<>();
+        int index = 0;
+        for(Tarefa item : tarefas) {
+            TarefaDTO tarefa = new TarefaDTO(item);
+            dto.add(tarefa);
+            if(index == 2) {
+                return dto;
+            }
+            index++;
+        }
+        return dto;
     }
 }

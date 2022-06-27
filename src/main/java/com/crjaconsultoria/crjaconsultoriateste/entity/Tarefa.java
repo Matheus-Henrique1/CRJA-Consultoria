@@ -5,15 +5,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.crjaconsultoria.crjaconsultoriateste.enums.DepartamentoEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,6 +19,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "tarefa")
 @Entity
 public class Tarefa implements Serializable{
 	
@@ -39,13 +32,17 @@ public class Tarefa implements Serializable{
 	private String descricao;
 	private LocalDate prazo;
 	private Integer idDepartamento;
-	private Integer duracao;
+	private Double duracao;
 	
 	@OneToOne
 	@JoinColumn(name = "pessoa_id" , referencedColumnName = "id")
 	private Pessoa pessoa;
 	private boolean finalizado;
-	
+
+	public Tarefa(LocalDate prazo, Double duracao) {
+		this.prazo = prazo;
+		this.duracao = duracao;
+	}
 
 }
 

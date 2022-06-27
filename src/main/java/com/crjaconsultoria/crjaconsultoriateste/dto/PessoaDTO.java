@@ -29,8 +29,15 @@ public class PessoaDTO implements Serializable{
 	private Integer idDepartamento;
 	private String departamento;
 	private Integer todaHorasTarefas;
+	private List<ResponseMediaDTO> media;
 
 	public PessoaDTO(String nome){
 		this.nome = nome;
+	}
+
+	public PessoaDTO(Pessoa pessoa) {
+		this.id = pessoa.getId();
+		this.nome = pessoa.getNome();
+		this.idDepartamento = pessoa.getIdDepartamento();
 	}
 }

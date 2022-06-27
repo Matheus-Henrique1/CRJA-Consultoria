@@ -20,6 +20,6 @@ public interface PessoaService {
 
     Pessoa buscarPessoaPorIdDepartamento(Integer idDepartamento) throws Exception;
 
-    Integer buscarTotalDePessoasPorDepartamento(Integer idDepartamento);
+    List<PessoaDTO> buscarPessoaPorNomeEPeriodo();
 
 }

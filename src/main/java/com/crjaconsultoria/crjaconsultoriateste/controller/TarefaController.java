@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/tarefas")
 public class TarefaController {
@@ -26,6 +28,11 @@ public class TarefaController {
     @RequestMapping(value = "/alocar/{id}", method = RequestMethod.PUT)
     public ResponseEntity<String> alocar(@PathVariable Integer id) throws Exception {
         return ResponseEntity.ok(tarefaService.alocarPessoaTarefa(id));
+    }
+
+    @RequestMapping(value = "/pendentes", method = RequestMethod.GET)
+    public ResponseEntity<List<TarefaDTO>> listarTarefasAntigas(){
+        return ResponseEntity.ok(tarefaService.listarTarefasAntigas());
     }
 
 }

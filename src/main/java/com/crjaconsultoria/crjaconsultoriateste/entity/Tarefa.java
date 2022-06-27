@@ -2,6 +2,7 @@ package com.crjaconsultoria.crjaconsultoriateste.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 import javax.persistence.CascadeType;
@@ -37,15 +38,13 @@ public class Tarefa implements Serializable{
 	private String titulo;
 	private String descricao;
 	private LocalDate prazo;
-	private DepartamentoEnum departamento;
+	private Integer idDepartamento;
 	private Integer duracao;
 	
-
-	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pessoa_id" , referencedColumnName = "id")
 	private Pessoa pessoa;
-	private Boolean finalizado;
+	private boolean finalizado;
 	
 
 }
